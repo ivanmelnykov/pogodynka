@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{# @var location \App\Entity\Location #}
+{# @var forecasts \App\Entity\Forecast[] #}
+
+
+{% block title %}Weather in {{ location.name }}, {{ location.country }}{% endblock %}
+
+
+{% block body %}
+    <main>
+        <h1>Weather in {{ location.name }}, {{ location.country }}</h1>
+
+
+        <ul>
+            {% for forecast in location.forecasts %}
+                <li>{{ forecast.date|date('d.m.Y') }}: {{ forecast.temperature }}&deg;C</li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}

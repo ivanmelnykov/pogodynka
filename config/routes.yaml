@@ -9,3 +9,9 @@
 
 controllers:
     resource: routing.controllers
+
+
+app_logout:
+
+    path: /logout
+    methods: GET

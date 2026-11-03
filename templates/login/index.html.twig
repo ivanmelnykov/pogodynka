@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block body %}
+    <div class="login-wrapper">
+        <h1>Sign in</h1>
+
+        {% if error %}
+            <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form action="{{ path('app_login') }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" required>
+
+
+
+            <button type="submit">Log in</button>
+        </form>
+    </div>
+{% endblock %}

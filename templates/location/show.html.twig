@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <h1>Location</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ location.name }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ location.country }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ location.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ location.longitude }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_location_index') }}">Back to list</a>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_location_edit', {'id': location.id}) }}">Edit</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_forecast_delete', {'id': location.id}) }}">Delete</a>
+    {% endif %}
+{% endblock %}
