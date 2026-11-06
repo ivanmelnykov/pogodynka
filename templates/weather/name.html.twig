@@ -1,22 +1,35 @@
 {% extends 'base.html.twig' %}
 
-
-{# @var location \App\Entity\Location #}
-{# @var forecasts \App\Entity\Forecast[] #}
-
-
 {% block title %}Weather in {{ location.name }}, {{ location.country }}{% endblock %}
 
-
 {% block body %}
-    <main>
-        <h1>Weather in {{ location.name }}, {{ location.country }}</h1>
+    <h1 class="mb-4">Weather in {{ location.name }}, {{ location.country }}</h1>
 
+    <div class="row">
+        <div class="col-md-8">
+            <div class="list-group">
+                {% for forecast in forecasts %}
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ forecast.date|date('d.m.Y') }}</h5>
+                            <span class="badge bg-primary rounded-pill fs-6">{{ forecast.temperature }}&deg;C</span>
+                        </div>
+                        <p class="mb-1 mt-2">
+                            <strong>Wind:</strong> {{ forecast.wind }} km/h &nbsp;|&nbsp;
+                            <strong>Humidity:</strong> {{ forecast.humidity }}% &nbsp;|&nbsp;
+                            <strong>Chance of preticipation:</strong> {{ forecast.chanceOfPreticipation }}%
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        Lack of data for this locaiton.
+                    </div>
+                {% endfor %}
+            </div>
 
-        <ul>
-            {% for forecast in location.forecasts %}
-                <li>{{ forecast.date|date('d.m.Y') }}: {{ forecast.temperature }}&deg;C</li>
-            {% endfor %}
-        </ul>
-    </main>
+            <div class="mt-3">
+                <a href="{{ path('app_location_index') }}" class="btn btn-secondary"> Back to the list of cities</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
